@@ -1,17 +1,20 @@
 swagger: '2.0'
 info:
-  description: ETPMarkets API Documentation
-  test test test
-  123
-  version: 'ver 1.0'
-  title: ETPMarkets API Documentation
+  description: This document contains basic workflow information on how to work with the application,
+  REST API documentation and
+  websockets API
+  version: '1.0'
+  title: ETPMarket API Documentation
   termsOfService: 'urn:tos'
-  contact: {}
-host: etpmarkets.com
-basePath: /api/v1/
+host: app.local
+basePath: /
 tags:
   - name: exchange-rest-controller
     description: Exchange Rest Controller
+  - name: instance-provider-rest-controller
+    description: Instance Provider Rest Controller
+  - name: payment-rest-controller
+    description: Payment Rest Controller
   - name: user-rest-controller
     description: User Rest Controller
 paths:
@@ -223,6 +226,1493 @@ paths:
         '403':
           description: Forbidden
       deprecated: false
+  /api/v1/exchanges/:
+    get:
+      tags:
+        - exchange-rest-controller
+      summary: getAllExchanges
+      operationId: getAllExchangesUsingGET_1
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Exchange'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - exchange-rest-controller
+      summary: createNewExchange
+      operationId: createNewExchangeUsingPOST_1
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: addPreConfiguredSettings
+          in: query
+          required: false
+          type: boolean
+        - name: dropletPerformance
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.archivedImageId
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.archivedImageName
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.cloudHardwareId
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.cloudImageId
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.cloudInstanceId
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.cloudInstanceProvider
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.cloudLocationId
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.cloudName
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.createdDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: editMachineInstance.description
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.domain
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.domainRecordId
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: editMachineInstance.ipAddress
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.location
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.machineInstanceId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: editMachineInstance.processor
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: editMachineInstance.ram
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: editMachineInstance.status
+          in: query
+          required: false
+          type: string
+          enum:
+            - PENDING
+            - RUNNING
+            - RESTARTING
+            - SUSPENDING
+            - SUSPENDED
+            - RESUMING
+            - TERMINATING
+            - TERMINATED
+            - ARCHIVING
+            - ARCHIVED
+            - RESTORING
+            - PROVIDER_CANT_CREATE_INSTANCE
+            - LOST
+        - name: editMachineInstance.updatedDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: exchangeDescription
+          in: query
+          required: false
+          type: string
+        - name: exchangeName
+          in: query
+          required: false
+          type: string
+        - name: exchangeTypeId
+          in: query
+          required: false
+          type: string
+        - name: sessionsNumber
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: supportedDropletPerformance
+          in: query
+          required: false
+          type: string
+          enum:
+            - PERFORMANCE_1CPU_2GB
+            - PERFORMANCE_1CPU_3GB
+            - PERFORMANCE_2CPU_4GB
+            - PERFORMANCE_4CPU_8GB
+            - PERFORMANCE_6CPU_16GB
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - exchange-rest-controller
+      summary: deleteExchanges
+      operationId: deleteExchangesUsingDELETE_1
+      produces:
+        - '*/*'
+      parameters:
+        - name: deleteIds
+          in: query
+          description: deleteIds
+          required: true
+          type: array
+          items:
+            type: integer
+            format: int64
+          collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /api/v1/exchanges/order-books:
+    put:
+      tags:
+        - exchange-rest-controller
+      summary: editOrderBook
+      operationId: editOrderBookUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: bbgCode
+          in: query
+          required: false
+          type: string
+        - name: clientOrderBookId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: defaultOpeningPrice
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: displayId
+          in: query
+          required: false
+          type: string
+        - name: exchange.availableSessions
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: exchange.clientExchangeId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: exchange.createdDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: exchange.description
+          in: query
+          required: false
+          type: string
+        - name: exchange.displayId
+          in: query
+          required: false
+          type: string
+        - name: exchange.exchangeId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: exchange.exchangeType.code
+          in: query
+          required: false
+          type: string
+        - name: exchange.exchangeType.description
+          in: query
+          required: false
+          type: string
+        - name: exchange.exchangeType.exchangeTypeId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: exchange.exchangeType.name
+          in: query
+          required: false
+          type: string
+        - name: exchange.exchangeType.region
+          in: query
+          required: false
+          type: string
+        - name: exchange.exchangeTypeId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: exchange.machineInstance.archivedImageId
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.archivedImageName
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.cloudHardwareId
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.cloudImageId
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.cloudInstanceId
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.cloudInstanceProvider
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.cloudLocationId
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.cloudName
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.createdDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: exchange.machineInstance.description
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.domain
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.domainRecordId
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: exchange.machineInstance.ipAddress
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.location
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.machineInstanceId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: exchange.machineInstance.processor
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: exchange.machineInstance.ram
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: exchange.machineInstance.status
+          in: query
+          required: false
+          type: string
+          enum:
+            - PENDING
+            - RUNNING
+            - RESTARTING
+            - SUSPENDING
+            - SUSPENDED
+            - RESUMING
+            - TERMINATING
+            - TERMINATED
+            - ARCHIVING
+            - ARCHIVED
+            - RESTORING
+            - PROVIDER_CANT_CREATE_INSTANCE
+            - LOST
+        - name: exchange.machineInstance.updatedDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: exchange.machineInstanceId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: 'exchange.marketDataGateways[0].displayId'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.marketDataGateways[0].mdGwyId'
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: 'exchange.marketDataGateways[0].name'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.marketDataGateways[0].port'
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: exchange.name
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.orderBooks[0].bbgCode'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.orderBooks[0].clientOrderBookId'
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: 'exchange.orderBooks[0].defaultOpeningPrice'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: 'exchange.orderBooks[0].displayId'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.orderBooks[0].isinCode'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.orderBooks[0].name'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.orderBooks[0].orderBookId'
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: 'exchange.orderBooks[0].ricCode'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.orderBooks[0].type'
+          in: query
+          required: false
+          type: string
+          enum:
+            - EQUITY
+        - name: 'exchange.orderBooks[0].viewCode'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.tradingGateways[0].displayId'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.tradingGateways[0].name'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.tradingGateways[0].overrideFields'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.tradingGateways[0].port'
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: 'exchange.tradingGateways[0].trGwyId'
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: exchange.updatedDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: exchange.userId
+          in: query
+          required: false
+          type: string
+        - name: isinCode
+          in: query
+          required: false
+          type: string
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: orderBookId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: ricCode
+          in: query
+          required: false
+          type: string
+        - name: type
+          in: query
+          required: false
+          type: string
+          enum:
+            - EQUITY
+        - name: viewCode
+          in: query
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - exchange-rest-controller
+      summary: deleteOrderBook
+      operationId: deleteOrderBookUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: deleteIds
+          in: query
+          description: deleteIds
+          required: true
+          type: array
+          items:
+            type: integer
+            format: int64
+          collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /api/v1/exchanges/order-books/:
+    delete:
+      tags:
+        - exchange-rest-controller
+      summary: deleteOrderBook
+      operationId: deleteOrderBookUsingDELETE_1
+      produces:
+        - '*/*'
+      parameters:
+        - name: deleteIds
+          in: query
+          description: deleteIds
+          required: true
+          type: array
+          items:
+            type: integer
+            format: int64
+          collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /api/v1/exchanges/sessions:
+    get:
+      tags:
+        - exchange-rest-controller
+      summary: availableSessionsNumber
+      operationId: availableSessionsNumberUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: exchangeTypeId
+          in: query
+          description: exchangeTypeId
+          required: false
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: integer
+              format: int32
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/v1/exchanges/trading-gateways:
+    put:
+      tags:
+        - exchange-rest-controller
+      summary: editTradingGateway
+      operationId: editTradingGatewayUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: editingTradingGateway
+          description: editingTradingGateway
+          required: true
+          schema:
+            $ref: '#/definitions/FixTradingGateway'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - exchange-rest-controller
+      summary: deleteTradingGateway
+      operationId: deleteTradingGatewayUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: deleteIds
+          in: query
+          description: deleteIds
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /api/v1/exchanges/trading-gateways/:
+    delete:
+      tags:
+        - exchange-rest-controller
+      summary: deleteTradingGateway
+      operationId: deleteTradingGatewayUsingDELETE_1
+      produces:
+        - '*/*'
+      parameters:
+        - name: deleteIds
+          in: query
+          description: deleteIds
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /api/v1/exchanges/types:
+    get:
+      tags:
+        - exchange-rest-controller
+      summary: availableExchangeType
+      operationId: availableExchangeTypeUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ExchangeType'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/api/v1/exchanges/{clientExchangeId}':
+    get:
+      tags:
+        - exchange-rest-controller
+      summary: getExchange
+      operationId: getExchangeUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: clientExchangeId
+          in: path
+          description: clientExchangeId
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Exchange'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/api/v1/exchanges/{clientExchangeId}/order-books':
+    get:
+      tags:
+        - exchange-rest-controller
+      summary: getOrderBookJson
+      operationId: getOrderBookJsonUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: clientExchangeId
+          in: path
+          description: clientExchangeId
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/OrderBook'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - exchange-rest-controller
+      summary: addOrderBook
+      operationId: addOrderBookUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: bbgCode
+          in: query
+          required: false
+          type: string
+        - name: clientExchangeId
+          in: path
+          description: clientExchangeId
+          required: true
+          type: integer
+          format: int64
+        - name: clientOrderBookId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: defaultOpeningPrice
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: displayId
+          in: query
+          required: false
+          type: string
+        - name: exchange.availableSessions
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: exchange.clientExchangeId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: exchange.createdDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: exchange.description
+          in: query
+          required: false
+          type: string
+        - name: exchange.displayId
+          in: query
+          required: false
+          type: string
+        - name: exchange.exchangeId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: exchange.exchangeType.code
+          in: query
+          required: false
+          type: string
+        - name: exchange.exchangeType.description
+          in: query
+          required: false
+          type: string
+        - name: exchange.exchangeType.exchangeTypeId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: exchange.exchangeType.name
+          in: query
+          required: false
+          type: string
+        - name: exchange.exchangeType.region
+          in: query
+          required: false
+          type: string
+        - name: exchange.exchangeTypeId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: exchange.machineInstance.archivedImageId
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.archivedImageName
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.cloudHardwareId
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.cloudImageId
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.cloudInstanceId
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.cloudInstanceProvider
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.cloudLocationId
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.cloudName
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.createdDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: exchange.machineInstance.description
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.domain
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.domainRecordId
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: exchange.machineInstance.ipAddress
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.location
+          in: query
+          required: false
+          type: string
+        - name: exchange.machineInstance.machineInstanceId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: exchange.machineInstance.processor
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: exchange.machineInstance.ram
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: exchange.machineInstance.status
+          in: query
+          required: false
+          type: string
+          enum:
+            - PENDING
+            - RUNNING
+            - RESTARTING
+            - SUSPENDING
+            - SUSPENDED
+            - RESUMING
+            - TERMINATING
+            - TERMINATED
+            - ARCHIVING
+            - ARCHIVED
+            - RESTORING
+            - PROVIDER_CANT_CREATE_INSTANCE
+            - LOST
+        - name: exchange.machineInstance.updatedDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: exchange.machineInstanceId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: 'exchange.marketDataGateways[0].displayId'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.marketDataGateways[0].mdGwyId'
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: 'exchange.marketDataGateways[0].name'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.marketDataGateways[0].port'
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: exchange.name
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.orderBooks[0].bbgCode'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.orderBooks[0].clientOrderBookId'
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: 'exchange.orderBooks[0].defaultOpeningPrice'
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: 'exchange.orderBooks[0].displayId'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.orderBooks[0].isinCode'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.orderBooks[0].name'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.orderBooks[0].orderBookId'
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: 'exchange.orderBooks[0].ricCode'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.orderBooks[0].type'
+          in: query
+          required: false
+          type: string
+          enum:
+            - EQUITY
+        - name: 'exchange.orderBooks[0].viewCode'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.tradingGateways[0].displayId'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.tradingGateways[0].name'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.tradingGateways[0].overrideFields'
+          in: query
+          required: false
+          type: string
+        - name: 'exchange.tradingGateways[0].port'
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: 'exchange.tradingGateways[0].trGwyId'
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: exchange.updatedDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: exchange.userId
+          in: query
+          required: false
+          type: string
+        - name: isinCode
+          in: query
+          required: false
+          type: string
+        - name: name
+          in: query
+          required: false
+          type: string
+        - name: orderBookId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: ricCode
+          in: query
+          required: false
+          type: string
+        - name: type
+          in: query
+          required: false
+          type: string
+          enum:
+            - EQUITY
+        - name: viewCode
+          in: query
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/api/v1/exchanges/{clientExchangeId}/start':
+    post:
+      tags:
+        - exchange-rest-controller
+      summary: startExchange
+      operationId: startExchangeUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: clientExchangeId
+          in: path
+          description: clientExchangeId
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/api/v1/exchanges/{clientExchangeId}/status':
+    get:
+      tags:
+        - exchange-rest-controller
+      summary: getExchangeLiveStatus
+      operationId: getExchangeLiveStatusUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: clientExchangeId
+          in: path
+          description: clientExchangeId
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/api/v1/exchanges/{clientExchangeId}/stop':
+    post:
+      tags:
+        - exchange-rest-controller
+      summary: forceStopExchange
+      operationId: forceStopExchangeUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: clientExchangeId
+          in: path
+          description: clientExchangeId
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/api/v1/exchanges/{clientExchangeId}/trading-gateways':
+    get:
+      tags:
+        - exchange-rest-controller
+      summary: getTradingGatewayJson
+      operationId: getTradingGatewayJsonUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: clientExchangeId
+          in: path
+          description: clientExchangeId
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TradingGateway'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - exchange-rest-controller
+      summary: addTradingGateway
+      operationId: addTradingGatewayUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: clientExchangeId
+          in: path
+          description: clientExchangeId
+          required: true
+          type: integer
+          format: int64
+        - in: body
+          name: newTradingGateway
+          description: newTradingGateway
+          required: true
+          schema:
+            $ref: '#/definitions/FixTradingGateway'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/v1/instances/locations:
+    get:
+      tags:
+        - instance-provider-rest-controller
+      summary: listCloudLocations
+      operationId: listCloudLocationsUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Map«string,object»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/v1/instances/performance:
+    get:
+      tags:
+        - instance-provider-rest-controller
+      summary: listSupportedDropletPerformance
+      operationId: listSupportedDropletPerformanceUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Map«string,object»'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/v1/instances/status:
+    post:
+      tags:
+        - instance-provider-rest-controller
+      summary: getInstancesStatuses
+      operationId: getInstancesStatusesUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: ids
+          in: query
+          description: ids
+          required: true
+          type: array
+          items:
+            type: integer
+            format: int64
+          collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  '/api/v1/instances/{machineInstanceId}/status':
+    get:
+      tags:
+        - instance-provider-rest-controller
+      summary: getInstanceStatus
+      operationId: getInstanceStatusUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: machineInstanceId
+          in: path
+          description: machineInstanceId
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/MachineInstance'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/v1/payments/pending:
+    delete:
+      tags:
+        - payment-rest-controller
+      summary: abortChangesRequest
+      operationId: abortChangesRequestUsingDELETE
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /api/v1/payments/prices:
+    post:
+      tags:
+        - payment-rest-controller
+      summary: getPayments
+      operationId: getPaymentsUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: addonExchanges
+          description: addonExchanges
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserAddonExchange'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/v1/payments/validate:
+    post:
+      tags:
+        - payment-rest-controller
+      summary: checkChanges
+      operationId: checkChangesUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: addonExchanges
+          description: addonExchanges
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserAddonExchange'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
   /api/v1/users:
     get:
       tags:
@@ -277,340 +1767,113 @@ paths:
         '404':
           description: Not Found
       deprecated: false
+  /api/v1/users/:
+    get:
+      tags:
+        - user-rest-controller
+      summary: getCurrentUser
+      operationId: getCurrentUserUsingGET_1
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/v1/users/info:
+    get:
+      tags:
+        - user-rest-controller
+      summary: getCurrentUserInfo
+      operationId: getCurrentUserInfoUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/UserInfo'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/v1/users/profile:
+    get:
+      tags:
+        - user-rest-controller
+      summary: getCurrentUserProfile
+      operationId: getCurrentUserProfileUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+  /api/v1/users/session:
+    get:
+      tags:
+        - user-rest-controller
+      summary: statusCheck
+      operationId: statusCheckUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: boolean
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
 definitions:
   Exchange:
     type: object
-    properties:
-      availableSessions:
-        type: integer
-        format: int32
-      clientExchangeId:
-        type: integer
-        format: int64
-      createdDate:
-        type: string
-        format: date-time
-      description:
-        type: string
-      displayId:
-        type: string
-      exchangeId:
-        type: integer
-        format: int64
-      exchangeType:
-        $ref: '#/definitions/ExchangeType'
-      exchangeTypeId:
-        type: integer
-        format: int64
-      machineInstance:
-        $ref: '#/definitions/MachineInstance'
-      machineInstanceId:
-        type: integer
-        format: int64
-      marketDataGateways:
-        type: array
-        items:
-          $ref: '#/definitions/MarketDataGateway'
-      name:
-        type: string
-      orderBooks:
-        type: array
-        items:
-          $ref: '#/definitions/OrderBook'
-      tradingGateways:
-        type: array
-        items:
-          $ref: '#/definitions/TradingGateway'
-      updatedDate:
-        type: string
-        format: date-time
-      userId:
-        type: string
     title: Exchange
   ExchangeType:
     type: object
-    properties:
-      code:
-        type: string
-      description:
-        type: string
-      exchangeTypeId:
-        type: integer
-        format: int64
-      name:
-        type: string
-      region:
-        type: string
     title: ExchangeType
+  FixTradingGateway:
+    type: object
+    title: FixTradingGateway
   MachineInstance:
     type: object
-    properties:
-      archivedImageId:
-        type: string
-      archivedImageName:
-        type: string
-      cloudHardwareId:
-        type: string
-      cloudImageId:
-        type: string
-      cloudInstanceId:
-        type: string
-      cloudInstanceProvider:
-        type: string
-      cloudLocationId:
-        type: string
-      cloudName:
-        type: string
-      createdDate:
-        type: string
-        format: date-time
-      description:
-        type: string
-      domain:
-        type: string
-      domainRecordId:
-        type: integer
-        format: int32
-      ipAddress:
-        type: string
-      location:
-        type: string
-      machineInstanceId:
-        type: integer
-        format: int64
-      processor:
-        type: number
-        format: double
-      ram:
-        type: integer
-        format: int32
-      status:
-        type: string
-        enum:
-          - PENDING
-          - RUNNING
-          - RESTARTING
-          - SUSPENDING
-          - SUSPENDED
-          - RESUMING
-          - TERMINATING
-          - TERMINATED
-          - ARCHIVING
-          - ARCHIVED
-          - RESTORING
-          - PROVIDER_CANT_CREATE_INSTANCE
-          - LOST
-      updatedDate:
-        type: string
-        format: date-time
     title: MachineInstance
-  MarketDataGateway:
-    type: object
-    properties:
-      displayId:
-        type: string
-      exchange:
-        $ref: '#/definitions/Exchange'
-      mdGwyId:
-        type: integer
-        format: int64
-      name:
-        type: string
-      port:
-        type: integer
-        format: int32
-    title: MarketDataGateway
   OrderBook:
     type: object
-    properties:
-      bbgCode:
-        type: string
-      clientOrderBookId:
-        type: integer
-        format: int64
-      defaultOpeningPrice:
-        type: number
-        format: double
-      displayId:
-        type: string
-      isinCode:
-        type: string
-      name:
-        type: string
-      orderBookId:
-        type: integer
-        format: int64
-      ricCode:
-        type: string
-      type:
-        type: string
-        enum:
-          - EQUITY
-      viewCode:
-        type: string
     title: OrderBook
   TradingGateway:
     type: object
-    properties:
-      displayId:
-        type: string
-      name:
-        type: string
-      overrideFields:
-        type: string
-      port:
-        type: integer
-        format: int32
-      trGwyId:
-        type: integer
-        format: int64
     title: TradingGateway
   User:
     type: object
-    properties:
-      billing:
-        type: boolean
-      createdDate:
-        type: string
-        format: date-time
-      loginId:
-        type: string
-      startSubscriptionDate:
-        type: string
-        format: date-time
-      status:
-        type: integer
-        format: int32
-      subscriptionPaymentId:
-        type: string
-      updatedDate:
-        type: string
-        format: date-time
-      usedTrial:
-        type: boolean
-      userId:
-        type: integer
-        format: int64
-      userPlan:
-        $ref: '#/definitions/UserPlan'
-      version:
-        type: integer
-        format: int64
     title: User
   UserAddonExchange:
     type: object
-    properties:
-      asUserAddonExchangeAudit:
-        $ref: '#/definitions/UserAddonExchangeAudit'
-      exchange:
-        $ref: '#/definitions/Exchange'
-      exchangeId:
-        type: integer
-        format: int64
-      exchangePaymentId:
-        type: string
-      exchangePrice:
-        type: number
-        format: double
-      sessionNumber:
-        type: integer
-        format: int32
-      sessionPaymentId:
-        type: string
-      sessionPrice:
-        type: number
-        format: double
-      userAddonExchangeId:
-        type: integer
-        format: int64
-      userPlan:
-        $ref: '#/definitions/UserPlan'
     title: UserAddonExchange
-  UserAddonExchangeAudit:
+  UserInfo:
     type: object
-    properties:
-      exchange:
-        $ref: '#/definitions/Exchange'
-      exchangeId:
-        type: integer
-        format: int64
-      exchangePaymentId:
-        type: string
-      exchangePrice:
-        type: number
-        format: double
-      sessionNumber:
-        type: integer
-        format: int32
-      sessionPaymentId:
-        type: string
-      sessionPrice:
-        type: number
-        format: double
-      userAddonExchangeAuditId:
-        type: integer
-        format: int64
-      userPlanAudit:
-        $ref: '#/definitions/UserPlanAudit'
-    title: UserAddonExchangeAudit
-  UserPlan:
-    type: object
-    properties:
-      planPaymentId:
-        type: string
-      startPlanDate:
-        type: string
-        format: date-time
-      trialDays:
-        type: integer
-        format: int64
-      userAddonExchange:
-        type: array
-        items:
-          $ref: '#/definitions/UserAddonExchange'
-      userPlanAudit:
-        type: array
-        items:
-          $ref: '#/definitions/UserPlanAudit'
-      userPlanId:
-        type: integer
-        format: int64
-    title: UserPlan
-  UserPlanAudit:
-    type: object
-    properties:
-      changeDate:
-        type: string
-        format: date-time
-      event:
-        type: string
-        enum:
-          - NONE
-          - ADD_PENDING
-          - ADDED
-          - CHANGE_PENDING
-          - CHANGED
-          - CLOSED
-          - CLOSED_AUTOMATICALLY
-          - ABORTED
-          - PAYMENT_ERROR
-      planPaymentId:
-        type: string
-      trialDays:
-        type: integer
-        format: int64
-      user:
-        $ref: '#/definitions/User'
-      userAddonExchangeAudit:
-        type: array
-        items:
-          $ref: '#/definitions/UserAddonExchangeAudit'
-      userId:
-        type: integer
-        format: int64
-      userPlan:
-        $ref: '#/definitions/UserPlan'
-      userPlanAuditId:
-        type: integer
-        format: int64
-    title: UserPlanAudit
+    title: UserInfo
