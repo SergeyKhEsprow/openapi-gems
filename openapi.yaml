@@ -195,7 +195,7 @@ paths:
       deprecated: false
     delete:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: deleteExchanges
       operationId: deleteExchangesUsingDELETE
       produces:
@@ -224,10 +224,10 @@ paths:
         '403':
           description: Forbidden
       deprecated: false
-  /api/v1/exchanges/:
+  /exchanges/:
     get:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: getAllExchanges
       operationId: getAllExchangesUsingGET_1
       produces:
@@ -248,7 +248,7 @@ paths:
       deprecated: false
     post:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: createNewExchange
       operationId: createNewExchangeUsingPOST_1
       consumes:
@@ -403,7 +403,7 @@ paths:
       deprecated: false
     delete:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: deleteExchanges
       operationId: deleteExchangesUsingDELETE_1
       produces:
@@ -432,10 +432,10 @@ paths:
         '403':
           description: Forbidden
       deprecated: false
-  /api/v1/exchanges/order-books:
+  /exchanges/order-books:
     put:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: editOrderBook
       operationId: editOrderBookUsingPUT
       consumes:
@@ -759,7 +759,7 @@ paths:
       deprecated: false
     delete:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: deleteOrderBook
       operationId: deleteOrderBookUsingDELETE
       produces:
@@ -788,10 +788,10 @@ paths:
         '403':
           description: Forbidden
       deprecated: false
-  /api/v1/exchanges/order-books/:
+  /exchanges/order-books/:
     delete:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: deleteOrderBook
       operationId: deleteOrderBookUsingDELETE_1
       produces:
@@ -820,10 +820,10 @@ paths:
         '403':
           description: Forbidden
       deprecated: false
-  /api/v1/exchanges/sessions:
+  /exchanges/sessions:
     get:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: availableSessionsNumber
       operationId: availableSessionsNumberUsingGET
       produces:
@@ -850,10 +850,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  /api/v1/exchanges/trading-gateways:
+  /exchanges/trading-gateways:
     put:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: editTradingGateway
       operationId: editTradingGatewayUsingPUT
       consumes:
@@ -885,7 +885,7 @@ paths:
       deprecated: false
     delete:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: deleteTradingGateway
       operationId: deleteTradingGatewayUsingDELETE
       produces:
@@ -913,10 +913,10 @@ paths:
         '403':
           description: Forbidden
       deprecated: false
-  /api/v1/exchanges/trading-gateways/:
+  /exchanges/trading-gateways/:
     delete:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: deleteTradingGateway
       operationId: deleteTradingGatewayUsingDELETE_1
       produces:
@@ -944,10 +944,10 @@ paths:
         '403':
           description: Forbidden
       deprecated: false
-  /api/v1/exchanges/types:
+  /exchanges/types:
     get:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: availableExchangeType
       operationId: availableExchangeTypeUsingGET
       produces:
@@ -966,10 +966,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  '/api/v1/exchanges/{clientExchangeId}':
+  '/exchanges/{clientExchangeId}':
     get:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: getExchange
       operationId: getExchangeUsingGET
       produces:
@@ -993,10 +993,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  '/api/v1/exchanges/{clientExchangeId}/order-books':
+  '/exchanges/{clientExchangeId}/order-books':
     get:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: getOrderBookJson
       operationId: getOrderBookJsonUsingGET
       produces:
@@ -1024,7 +1024,7 @@ paths:
       deprecated: false
     post:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: addOrderBook
       operationId: addOrderBookUsingPOST
       consumes:
@@ -1352,10 +1352,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  '/api/v1/exchanges/{clientExchangeId}/start':
+  '/exchanges/{clientExchangeId}/start':
     post:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: startExchange
       operationId: startExchangeUsingPOST
       consumes:
@@ -1385,10 +1385,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  '/api/v1/exchanges/{clientExchangeId}/status':
+  '/exchanges/{clientExchangeId}/status':
     get:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: getExchangeLiveStatus
       operationId: getExchangeLiveStatusUsingGET
       produces:
@@ -1412,10 +1412,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  '/api/v1/exchanges/{clientExchangeId}/stop':
+  '/exchanges/{clientExchangeId}/stop':
     post:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: forceStopExchange
       operationId: forceStopExchangeUsingPOST
       consumes:
@@ -1445,10 +1445,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  '/api/v1/exchanges/{clientExchangeId}/trading-gateways':
+  '/exchanges/{clientExchangeId}/trading-gateways':
     get:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: getTradingGatewayJson
       operationId: getTradingGatewayJsonUsingGET
       produces:
@@ -1476,7 +1476,7 @@ paths:
       deprecated: false
     post:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: addTradingGateway
       operationId: addTradingGatewayUsingPOST
       consumes:
@@ -1512,10 +1512,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  /api/v1/instances/locations:
+  /instances/locations:
     get:
       tags:
-        - instance-provider-rest-controller
+        - Machine Instances
       summary: listCloudLocations
       operationId: listCloudLocationsUsingGET
       produces:
@@ -1534,10 +1534,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  /api/v1/instances/performance:
+  /instances/performance:
     get:
       tags:
-        - instance-provider-rest-controller
+        - Machine Instances
       summary: listSupportedDropletPerformance
       operationId: listSupportedDropletPerformanceUsingGET
       produces:
@@ -1556,10 +1556,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  /api/v1/instances/status:
+  /instances/status:
     post:
       tags:
-        - instance-provider-rest-controller
+        - Machine Instances
       summary: getInstancesStatuses
       operationId: getInstancesStatusesUsingPOST
       consumes:
@@ -1592,10 +1592,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  '/api/v1/instances/{machineInstanceId}/status':
+  '/instances/{machineInstanceId}/status':
     get:
       tags:
-        - instance-provider-rest-controller
+        - Machine Instances
       summary: getInstanceStatus
       operationId: getInstanceStatusUsingGET
       produces:
@@ -1619,10 +1619,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  /api/v1/payments/pending:
+  /payments/pending:
     delete:
       tags:
-        - payment-rest-controller
+        - Payments
       summary: abortChangesRequest
       operationId: abortChangesRequestUsingDELETE
       produces:
@@ -1641,10 +1641,10 @@ paths:
         '403':
           description: Forbidden
       deprecated: false
-  /api/v1/payments/prices:
+  /payments/prices:
     post:
       tags:
-        - payment-rest-controller
+        - Payments
       summary: getPayments
       operationId: getPaymentsUsingPOST
       consumes:
@@ -1676,10 +1676,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  /api/v1/payments/validate:
+  /payments/validate:
     post:
       tags:
-        - payment-rest-controller
+        - Payments
       summary: checkChanges
       operationId: checkChangesUsingPOST
       consumes:
@@ -1711,10 +1711,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  /api/v1/users:
+  /users:
     get:
       tags:
-        - user-rest-controller
+        - Users
       summary: getCurrentUser
       operationId: getCurrentUserUsingGET
       produces:
@@ -1733,7 +1733,7 @@ paths:
       deprecated: false
     put:
       tags:
-        - user-rest-controller
+        - Users
       summary: updateUserInformationPost
       operationId: updateUserInformationPostUsingPUT
       consumes:
@@ -1765,10 +1765,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  /api/v1/users/:
+  /users/:
     get:
       tags:
-        - user-rest-controller
+        - Users
       summary: getCurrentUser
       operationId: getCurrentUserUsingGET_1
       produces:
@@ -1785,10 +1785,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  /api/v1/users/info:
+  /users/info:
     get:
       tags:
-        - user-rest-controller
+        - Users
       summary: getCurrentUserInfo
       operationId: getCurrentUserInfoUsingGET
       produces:
@@ -1805,10 +1805,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  /api/v1/users/profile:
+  /users/profile:
     get:
       tags:
-        - user-rest-controller
+        - Users
       summary: getCurrentUserProfile
       operationId: getCurrentUserProfileUsingGET
       produces:
@@ -1825,10 +1825,10 @@ paths:
         '404':
           description: Not Found
       deprecated: false
-  /api/v1/users/session:
+  /users/session:
     get:
       tags:
-        - user-rest-controller
+        - Users
       summary: statusCheck
       operationId: statusCheckUsingGET
       produces:
