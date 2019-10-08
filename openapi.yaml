@@ -1,0 +1,617 @@
+swagger: '2.0'
+info:
+  description: Api Documentation
+  version: '1.0'
+  title: Api Documentation
+  termsOfService: 'urn:tos'
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+host: app.local
+basePath: /
+tags:
+  - name: exchange-rest-controller
+    description: Exchange Rest Controller
+  - name: user-rest-controller
+    description: User Rest Controller
+paths:
+  /api/v1/exchanges:
+    get:
+      tags:
+        - exchange-rest-controller
+      summary: getAllExchanges
+      operationId: getAllExchangesUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Exchange'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    post:
+      tags:
+        - exchange-rest-controller
+      summary: createNewExchange
+      operationId: createNewExchangeUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - name: addPreConfiguredSettings
+          in: query
+          required: false
+          type: boolean
+        - name: dropletPerformance
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.archivedImageId
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.archivedImageName
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.cloudHardwareId
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.cloudImageId
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.cloudInstanceId
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.cloudInstanceProvider
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.cloudLocationId
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.cloudName
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.createdDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: editMachineInstance.description
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.domain
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.domainRecordId
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: editMachineInstance.ipAddress
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.location
+          in: query
+          required: false
+          type: string
+        - name: editMachineInstance.machineInstanceId
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: editMachineInstance.processor
+          in: query
+          required: false
+          type: number
+          format: double
+        - name: editMachineInstance.ram
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: editMachineInstance.status
+          in: query
+          required: false
+          type: string
+          enum:
+            - PENDING
+            - RUNNING
+            - RESTARTING
+            - SUSPENDING
+            - SUSPENDED
+            - RESUMING
+            - TERMINATING
+            - TERMINATED
+            - ARCHIVING
+            - ARCHIVED
+            - RESTORING
+            - PROVIDER_CANT_CREATE_INSTANCE
+            - LOST
+        - name: editMachineInstance.updatedDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: exchangeDescription
+          in: query
+          required: false
+          type: string
+        - name: exchangeName
+          in: query
+          required: false
+          type: string
+        - name: exchangeTypeId
+          in: query
+          required: false
+          type: string
+        - name: sessionsNumber
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: supportedDropletPerformance
+          in: query
+          required: false
+          type: string
+          enum:
+            - PERFORMANCE_1CPU_2GB
+            - PERFORMANCE_1CPU_3GB
+            - PERFORMANCE_2CPU_4GB
+            - PERFORMANCE_4CPU_8GB
+            - PERFORMANCE_6CPU_16GB
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    delete:
+      tags:
+        - exchange-rest-controller
+      summary: deleteExchanges
+      operationId: deleteExchangesUsingDELETE
+      produces:
+        - '*/*'
+      parameters:
+        - name: deleteIds
+          in: query
+          description: deleteIds
+          required: true
+          type: array
+          items:
+            type: integer
+            format: int64
+          collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      deprecated: false
+  /api/v1/users:
+    get:
+      tags:
+        - user-rest-controller
+      summary: getCurrentUser
+      operationId: getCurrentUserUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/User'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+    put:
+      tags:
+        - user-rest-controller
+      summary: updateUserInformationPost
+      operationId: updateUserInformationPostUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: metadata
+          description: metadata
+          required: false
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      deprecated: false
+definitions:
+  Exchange:
+    type: object
+    properties:
+      availableSessions:
+        type: integer
+        format: int32
+      clientExchangeId:
+        type: integer
+        format: int64
+      createdDate:
+        type: string
+        format: date-time
+      description:
+        type: string
+      displayId:
+        type: string
+      exchangeId:
+        type: integer
+        format: int64
+      exchangeType:
+        $ref: '#/definitions/ExchangeType'
+      exchangeTypeId:
+        type: integer
+        format: int64
+      machineInstance:
+        $ref: '#/definitions/MachineInstance'
+      machineInstanceId:
+        type: integer
+        format: int64
+      marketDataGateways:
+        type: array
+        items:
+          $ref: '#/definitions/MarketDataGateway'
+      name:
+        type: string
+      orderBooks:
+        type: array
+        items:
+          $ref: '#/definitions/OrderBook'
+      tradingGateways:
+        type: array
+        items:
+          $ref: '#/definitions/TradingGateway'
+      updatedDate:
+        type: string
+        format: date-time
+      userId:
+        type: string
+    title: Exchange
+  ExchangeType:
+    type: object
+    properties:
+      code:
+        type: string
+      description:
+        type: string
+      exchangeTypeId:
+        type: integer
+        format: int64
+      name:
+        type: string
+      region:
+        type: string
+    title: ExchangeType
+  MachineInstance:
+    type: object
+    properties:
+      archivedImageId:
+        type: string
+      archivedImageName:
+        type: string
+      cloudHardwareId:
+        type: string
+      cloudImageId:
+        type: string
+      cloudInstanceId:
+        type: string
+      cloudInstanceProvider:
+        type: string
+      cloudLocationId:
+        type: string
+      cloudName:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      description:
+        type: string
+      domain:
+        type: string
+      domainRecordId:
+        type: integer
+        format: int32
+      ipAddress:
+        type: string
+      location:
+        type: string
+      machineInstanceId:
+        type: integer
+        format: int64
+      processor:
+        type: number
+        format: double
+      ram:
+        type: integer
+        format: int32
+      status:
+        type: string
+        enum:
+          - PENDING
+          - RUNNING
+          - RESTARTING
+          - SUSPENDING
+          - SUSPENDED
+          - RESUMING
+          - TERMINATING
+          - TERMINATED
+          - ARCHIVING
+          - ARCHIVED
+          - RESTORING
+          - PROVIDER_CANT_CREATE_INSTANCE
+          - LOST
+      updatedDate:
+        type: string
+        format: date-time
+    title: MachineInstance
+  MarketDataGateway:
+    type: object
+    properties:
+      displayId:
+        type: string
+      exchange:
+        $ref: '#/definitions/Exchange'
+      mdGwyId:
+        type: integer
+        format: int64
+      name:
+        type: string
+      port:
+        type: integer
+        format: int32
+    title: MarketDataGateway
+  OrderBook:
+    type: object
+    properties:
+      bbgCode:
+        type: string
+      clientOrderBookId:
+        type: integer
+        format: int64
+      defaultOpeningPrice:
+        type: number
+        format: double
+      displayId:
+        type: string
+      isinCode:
+        type: string
+      name:
+        type: string
+      orderBookId:
+        type: integer
+        format: int64
+      ricCode:
+        type: string
+      type:
+        type: string
+        enum:
+          - EQUITY
+      viewCode:
+        type: string
+    title: OrderBook
+  TradingGateway:
+    type: object
+    properties:
+      displayId:
+        type: string
+      name:
+        type: string
+      overrideFields:
+        type: string
+      port:
+        type: integer
+        format: int32
+      trGwyId:
+        type: integer
+        format: int64
+    title: TradingGateway
+  User:
+    type: object
+    properties:
+      billing:
+        type: boolean
+      createdDate:
+        type: string
+        format: date-time
+      loginId:
+        type: string
+      startSubscriptionDate:
+        type: string
+        format: date-time
+      status:
+        type: integer
+        format: int32
+      subscriptionPaymentId:
+        type: string
+      updatedDate:
+        type: string
+        format: date-time
+      usedTrial:
+        type: boolean
+      userId:
+        type: integer
+        format: int64
+      userPlan:
+        $ref: '#/definitions/UserPlan'
+      version:
+        type: integer
+        format: int64
+    title: User
+  UserAddonExchange:
+    type: object
+    properties:
+      asUserAddonExchangeAudit:
+        $ref: '#/definitions/UserAddonExchangeAudit'
+      exchange:
+        $ref: '#/definitions/Exchange'
+      exchangeId:
+        type: integer
+        format: int64
+      exchangePaymentId:
+        type: string
+      exchangePrice:
+        type: number
+        format: double
+      sessionNumber:
+        type: integer
+        format: int32
+      sessionPaymentId:
+        type: string
+      sessionPrice:
+        type: number
+        format: double
+      userAddonExchangeId:
+        type: integer
+        format: int64
+      userPlan:
+        $ref: '#/definitions/UserPlan'
+    title: UserAddonExchange
+  UserAddonExchangeAudit:
+    type: object
+    properties:
+      exchange:
+        $ref: '#/definitions/Exchange'
+      exchangeId:
+        type: integer
+        format: int64
+      exchangePaymentId:
+        type: string
+      exchangePrice:
+        type: number
+        format: double
+      sessionNumber:
+        type: integer
+        format: int32
+      sessionPaymentId:
+        type: string
+      sessionPrice:
+        type: number
+        format: double
+      userAddonExchangeAuditId:
+        type: integer
+        format: int64
+      userPlanAudit:
+        $ref: '#/definitions/UserPlanAudit'
+    title: UserAddonExchangeAudit
+  UserPlan:
+    type: object
+    properties:
+      planPaymentId:
+        type: string
+      startPlanDate:
+        type: string
+        format: date-time
+      trialDays:
+        type: integer
+        format: int64
+      userAddonExchange:
+        type: array
+        items:
+          $ref: '#/definitions/UserAddonExchange'
+      userPlanAudit:
+        type: array
+        items:
+          $ref: '#/definitions/UserPlanAudit'
+      userPlanId:
+        type: integer
+        format: int64
+    title: UserPlan
+  UserPlanAudit:
+    type: object
+    properties:
+      changeDate:
+        type: string
+        format: date-time
+      event:
+        type: string
+        enum:
+          - NONE
+          - ADD_PENDING
+          - ADDED
+          - CHANGE_PENDING
+          - CHANGED
+          - CLOSED
+          - CLOSED_AUTOMATICALLY
+          - ABORTED
+          - PAYMENT_ERROR
+      planPaymentId:
+        type: string
+      trialDays:
+        type: integer
+        format: int64
+      user:
+        $ref: '#/definitions/User'
+      userAddonExchangeAudit:
+        type: array
+        items:
+          $ref: '#/definitions/UserAddonExchangeAudit'
+      userId:
+        type: integer
+        format: int64
+      userPlan:
+        $ref: '#/definitions/UserPlan'
+      userPlanAuditId:
+        type: integer
+        format: int64
+    title: UserPlanAudit
