@@ -20,7 +20,7 @@ paths:
     get:
       tags:
         - Exchanges
-      summary: getAllExchanges
+      summary: Get list of exchanges for the current session
       operationId: getAllExchangesUsingGET
       produces:
         - '*/*'
@@ -40,43 +40,27 @@ paths:
       deprecated: false
     post:
       tags:
-        - Machine Instances
-      summary: createNewExchange
+        - Exchanges
+      summary: Create new exchange for the current session
       operationId: createNewExchangeUsingPOST
       consumes:
         - application/json
       produces:
         - '*/*'
       parameters:
+        - name: exchangeName
+          in: query
+          required: false
+          type: string
+         - name: exchangeDescription
+          in: query
+          required: false
+          type: string
         - name: addPreConfiguredSettings
           in: query
           required: false
-          type: boolean
-        - name: dropletPerformance
-          in: query
-          required: false
-          type: string
-        - name: editMachineInstance.archivedImageId
-          in: query
-          required: false
-          type: string
-        - name: editMachineInstance.archivedImageName
-          in: query
-          required: false
-          type: string
-        - name: editMachineInstance.cloudHardwareId
-          in: query
-          required: false
-          type: string
-        - name: editMachineInstance.cloudImageId
-          in: query
-          required: false
-          type: string
-        - name: editMachineInstance.cloudInstanceId
-          in: query
-          required: false
-          type: string
-        - name: editMachineInstance.cloudInstanceProvider
+          type: boolean        
+        - name: exchangeTypeId
           in: query
           required: false
           type: string
@@ -84,83 +68,7 @@ paths:
           in: query
           required: false
           type: string
-        - name: editMachineInstance.cloudName
-          in: query
-          required: false
-          type: string
-        - name: editMachineInstance.createdDate
-          in: query
-          required: false
-          type: string
-          format: date-time
-        - name: editMachineInstance.description
-          in: query
-          required: false
-          type: string
-        - name: editMachineInstance.domain
-          in: query
-          required: false
-          type: string
-        - name: editMachineInstance.domainRecordId
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: editMachineInstance.ipAddress
-          in: query
-          required: false
-          type: string
-        - name: editMachineInstance.location
-          in: query
-          required: false
-          type: string
-        - name: editMachineInstance.machineInstanceId
-          in: query
-          required: false
-          type: integer
-          format: int64
-        - name: editMachineInstance.processor
-          in: query
-          required: false
-          type: number
-          format: double
-        - name: editMachineInstance.ram
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: editMachineInstance.status
-          in: query
-          required: false
-          type: string
-          enum:
-            - PENDING
-            - RUNNING
-            - RESTARTING
-            - SUSPENDING
-            - SUSPENDED
-            - RESUMING
-            - TERMINATING
-            - TERMINATED
-            - ARCHIVING
-            - ARCHIVED
-            - RESTORING
-            - PROVIDER_CANT_CREATE_INSTANCE
-            - LOST
-        - name: editMachineInstance.updatedDate
-          in: query
-          required: false
-          type: string
-          format: date-time
-        - name: exchangeDescription
-          in: query
-          required: false
-          type: string
-        - name: exchangeName
-          in: query
-          required: false
-          type: string
-        - name: exchangeTypeId
+        - name: dropletPerformance
           in: query
           required: false
           type: string
@@ -169,25 +77,13 @@ paths:
           required: false
           type: integer
           format: int32
-        - name: supportedDropletPerformance
-          in: query
-          required: false
-          type: string
-          enum:
-            - PERFORMANCE_1CPU_2GB
-            - PERFORMANCE_1CPU_3GB
-            - PERFORMANCE_2CPU_4GB
-            - PERFORMANCE_4CPU_8GB
-            - PERFORMANCE_6CPU_16GB
       responses:
         '200':
           description: OK
           schema:
             type: object
-        '201':
-          description: Created
-        '401':
-          description: Unauthorized
+        '400':
+          description: Bad request
         '403':
           description: Forbidden
         '404':
@@ -224,7 +120,6 @@ paths:
         '403':
           description: Forbidden
       deprecated: false
-  /exchanges/:
     get:
       tags:
         - Exchanges
