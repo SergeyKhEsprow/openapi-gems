@@ -52,7 +52,7 @@ paths:
           in: query
           required: false
           type: string
-         - name: exchangeDescription
+        - name: exchangeDescription
           in: query
           required: false
           type: string
