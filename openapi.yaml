@@ -1875,3 +1875,6 @@ definitions:
   UserInfo:
     type: object
     title: UserInfo
+  Map«string,object»:
+    type: object
+    tirle: Standart Java Map
