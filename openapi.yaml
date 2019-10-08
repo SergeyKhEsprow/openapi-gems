@@ -1,27 +1,26 @@
 swagger: '2.0'
 info:
-  description: This document contains basic workflow information on how to work with the application,
-  REST API documentation and
-  websockets API
+  description: This document contains basic workflow information how the application works,
+  REST API and Web Sockets API documentations
   version: '1.0'
   title: ETPMarket API Documentation
   termsOfService: 'urn:tos'
-host: app.local
-basePath: /
+host: etpmarkets.com
+basePath: /api/v1
 tags:
-  - name: exchange-rest-controller
-    description: Exchange Rest Controller
-  - name: instance-provider-rest-controller
-    description: Instance Provider Rest Controller
-  - name: payment-rest-controller
-    description: Payment Rest Controller
-  - name: user-rest-controller
-    description: User Rest Controller
+  - name: Exchanges
+    description: REST API for working with exchanges
+  - name: Machine Instances
+    description: REST API for working with machine isntances
+  - name: Payments
+    description: REST API for working with payments
+  - name: Users
+    description: REST API for working with users
 paths:
-  /api/v1/exchanges:
+  /exchanges:
     get:
       tags:
-        - exchange-rest-controller
+        - Exchanges
       summary: getAllExchanges
       operationId: getAllExchangesUsingGET
       produces:
@@ -42,7 +41,7 @@ paths:
       deprecated: false
     post:
       tags:
-        - exchange-rest-controller
+        - Machine Instances
       summary: createNewExchange
       operationId: createNewExchangeUsingPOST
       consumes:
