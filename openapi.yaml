@@ -1,7 +1,6 @@
 swagger: '2.0'
 info:
-  description: This document contains basic workflow information how the application works,
-  REST API and Web Sockets API documentations
+  description: This document contains basic workflow information how the application works, REST API and Web Sockets API documentations
   version: '1.0'
   title: ETPMarket API Documentation
   termsOfService: 'urn:tos'
