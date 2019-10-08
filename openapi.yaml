@@ -1,15 +1,14 @@
 swagger: '2.0'
 info:
   description: ETPMarkets API Documentation
+  test test test
+  123
   version: 'ver 1.0'
-  title: Api Documentation
+  title: ETPMarkets API Documentation
   termsOfService: 'urn:tos'
   contact: {}
-  license:
-    name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0'
-host: app.local
-basePath: /
+host: etpmarkets.com
+basePath: /api/v1/
 tags:
   - name: exchange-rest-controller
     description: Exchange Rest Controller
