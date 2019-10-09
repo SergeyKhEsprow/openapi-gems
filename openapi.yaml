@@ -31,7 +31,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
@@ -91,7 +91,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMessage'
         400:
@@ -125,13 +125,13 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMessage'
         400:
           description: Not Found
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMessage'
         401:
@@ -143,7 +143,7 @@ paths:
         404:
           description: Bad request
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMessage'
       deprecated: false
@@ -165,7 +165,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
@@ -233,7 +233,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMessage'
         401:
@@ -299,7 +299,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMessage'
         401:
@@ -333,7 +333,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMessage'
         401:
@@ -365,7 +365,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 example:
@@ -402,7 +402,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: object
                 additionalProperties:
@@ -437,7 +437,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMessage'
         401:
@@ -458,7 +458,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 example:
@@ -498,7 +498,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/Exchange'
         401:
@@ -529,7 +529,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMessage'
         401:
@@ -560,7 +560,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMessage'
         401:
@@ -591,7 +591,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/MachineInstanceStatus'
         401:
@@ -622,7 +622,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 items:
@@ -661,7 +661,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: object
                 additionalProperties:
@@ -686,7 +686,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 example:
@@ -735,7 +735,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: array
                 example:
@@ -788,7 +788,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: object
                 additionalProperties:
@@ -825,7 +825,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/MachineInstance'
         401:
@@ -852,7 +852,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMessage'
         401:
@@ -891,7 +891,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/Prices'
         401:
@@ -937,7 +937,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMessage'
               example:
@@ -962,7 +962,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/User'
         401:
@@ -985,7 +985,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: object
         401:
@@ -1017,7 +1017,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMessage'
         401:
@@ -1040,7 +1040,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/UserInfo'
         401:
@@ -1064,7 +1064,7 @@ paths:
         200:
           description: OK
           content:
-            '*/*':
+            application/json:
               schema:
                 type: object
                 properties:
