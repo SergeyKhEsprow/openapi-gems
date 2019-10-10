@@ -624,7 +624,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/TradingGateway'
+                  $ref: '#/components/schemas/FixTradingGateway'
         401:
           description: Unauthorized
           content: {}
@@ -1148,7 +1148,7 @@ components:
         tradingGateways:
           type: array
           items:
-            $ref: '#/components/schemas/TradingGateway'
+            $ref: '#/components/schemas/FixTradingGateway'
     ExchangeTypeInfo:
       title: ExchangeTypeInfo
       type: object
@@ -1175,9 +1175,6 @@ components:
         code:
           type: string
           example: fix42
-    FixTradingGateway:
-      title: FixTradingGateway
-      type: object
     MachineInstance:
       title: MachineInstance
       type: object
@@ -1247,8 +1244,8 @@ components:
         displayId:
           type: string
           example: OB-000001
-    TradingGateway:
-      title: TradingGateway
+    FixTradingGateway:
+      title: FixTradingGateway
       type: object
       properties:
         trGwyId:
