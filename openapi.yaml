@@ -404,9 +404,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                additionalProperties:
-                  type: string
+                $ref: '#/components/schemas/ResponseMessage'
         401:
           description: Unauthorized
           content: {}
